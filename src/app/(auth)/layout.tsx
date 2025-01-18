@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Lato } from "next/font/google";
-import "./globals.css";
+import { Instrument_Sans } from "next/font/google";
+import "../globals.css";
 
-const inter = Inter({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
 });
 
@@ -18,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${instrumentSans.className} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

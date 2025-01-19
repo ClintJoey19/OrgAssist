@@ -1,5 +1,7 @@
 import React from "react";
-import Sidebar from "./components/Sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import WorkspaceSidebar from "./components/WorkspaceSidebar";
+import WorkspaceNavbar from "./components/WorkspaceNavbar";
 
 type Props = {
   children: React.ReactNode;
@@ -7,10 +9,13 @@ type Props = {
 
 const layout = ({ children }: Props) => {
   return (
-    <main className="grid grid-cols-[250px_1fr]">
-      <Sidebar />
-      <section className="h-[92vh]">{children}</section>
-    </main>
+    <SidebarProvider>
+      <WorkspaceSidebar />
+      <main className="w-full">
+        <WorkspaceNavbar />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 };
 

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import "../globals.css";
-import WorkspaceNavbar from "./components/WorkspaceNavbar";
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -20,8 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${instrumentSans.className} antialiased`}>
-        <WorkspaceNavbar />
-        <main className="pt-[8vh]">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );

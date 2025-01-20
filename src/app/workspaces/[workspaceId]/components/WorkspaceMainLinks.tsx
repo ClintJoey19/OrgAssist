@@ -7,54 +7,95 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { LayoutGrid, Mail, Settings, Ticket } from "lucide-react";
+import {
+  CircleHelp,
+  LayoutGrid,
+  Mail,
+  Settings,
+  Ticket,
+  TicketPlus,
+} from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React from "react";
 
-const sidebarLinks = [
+const sidebarGroups = [
   {
-    label: "Dashboard",
-    logo: LayoutGrid,
-    href: "/dashboard",
+    label: "General",
+    links: [
+      {
+        label: "Dashboard",
+        logo: LayoutGrid,
+        href: "dashboard",
+      },
+      {
+        label: "Messages",
+        logo: Mail,
+        href: "messages",
+      },
+    ],
   },
   {
-    label: "Tickets",
-    logo: Ticket,
-    href: "/tickets",
+    label: "My Tickets",
+    links: [
+      {
+        label: "Create Ticket",
+        logo: TicketPlus,
+        href: "create-ticket",
+      },
+      {
+        label: "Tickets",
+        logo: Ticket,
+        href: "tickets",
+      },
+    ],
   },
   {
-    label: "Messages",
-    logo: Mail,
-    href: "/messages",
-  },
-  {
-    label: "Settings",
-    logo: Settings,
-    href: "/settings",
+    label: "Personalization",
+    links: [
+      {
+        label: "Settings",
+        logo: Settings,
+        href: "settings",
+      },
+      {
+        label: "Support & Feedback",
+        logo: CircleHelp,
+        href: "support",
+      },
+    ],
   },
 ];
 
 const WorkspaceMainLinks = () => {
   const { workspaceId } = useParams();
+  const pathname = usePathname();
 
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Overview</SidebarGroupLabel>
-      <SidebarGroupContent>
-        <SidebarMenu>
-          {sidebarLinks.map((link) => (
-            <SidebarMenuItem key={link.label}>
-              <SidebarMenuButton asChild>
-                <Link href={`/workspaces/${workspaceId}/${link.href}`}>
-                  <link.logo /> {link.label}
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarGroupContent>
-    </SidebarGroup>
+    <>
+      {sidebarGroups.map((group) => (
+        <SidebarGroup key={group.label}>
+          <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {group.links.map((link) => {
+                const isActive = pathname.includes(link.href);
+
+                return (
+                  <SidebarMenuItem key={link.label}>
+                    <SidebarMenuButton isActive={isActive} asChild>
+                      <Link href={`/workspaces/${workspaceId}/${link.href}`}>
+                        <link.logo /> {link.label}
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      ))}
+    </>
   );
 };
 

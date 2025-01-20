@@ -4,7 +4,7 @@ const page = () => {
   return (
     <section className="flex flex-col gap-4 p-4">
       <div>
-        <h3 className="h3">Messages</h3>
+        <h3 className="h3">Create Ticket</h3>
       </div>
       <div>Content here</div>
     </section>

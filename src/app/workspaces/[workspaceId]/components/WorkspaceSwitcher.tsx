@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,33 +7,47 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { SidebarMenuButton } from "@/components/ui/sidebar";
+import { SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
 import { ChevronsUpDown, Plus } from "lucide-react";
 import React from "react";
+import WorkspaceDialogForm from "./WorkspaceDialogForm";
 
 const WorkspaceSwitcher = () => {
+  const { isMobile } = useSidebar();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <SidebarMenuButton size="lg">
-          Select Workspace <ChevronsUpDown className="ml-auto" />
+        <SidebarMenuButton
+          size="lg"
+          className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+        >
+          <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-sidebar-primary-foreground">
+            <span>A</span>
+          </div>
+          <div className="">Select Workspace</div>
+          <ChevronsUpDown className="ml-auto" />
         </SidebarMenuButton>
       </DropdownMenuTrigger>
-      <DropdownMenuContent side="right">
+      <DropdownMenuContent
+        className="max-w-[250px]"
+        side={isMobile ? "bottom" : "right"}
+      >
         <DropdownMenuLabel>Workspaces</DropdownMenuLabel>
         <DropdownMenuItem>
-          <span>Workspace 1</span>
+          <div className="flex aspect-square size-6 items-center justify-center rounded-md bg-primary text-sidebar-primary-foreground">
+            <span>A</span>
+          </div>
+          <span className="truncate">Workspace 1 hahahah hahahahah</span>
         </DropdownMenuItem>
         <DropdownMenuItem>
+          <div className="flex aspect-square size-6 items-center justify-center rounded-md bg-primary text-sidebar-primary-foreground">
+            <span>A</span>
+          </div>
           <span>Workspace 2</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-            <Plus className="size-4" />
-          </div>
-          <div className="font-medium text-muted-foreground">Add team</div>
-        </DropdownMenuItem>
+        <WorkspaceDialogForm />
       </DropdownMenuContent>
     </DropdownMenu>
   );

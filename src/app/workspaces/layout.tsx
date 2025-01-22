@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import "../globals.css";
+import { ThemeProvider } from "next-themes";
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${instrumentSans.className} antialiased`}>
-        <main>{children}</main>
+        <ThemeProvider defaultTheme="dark">
+          <main className="bg-background text-foreground">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );

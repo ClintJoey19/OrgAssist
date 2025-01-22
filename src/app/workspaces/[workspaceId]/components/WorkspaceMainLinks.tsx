@@ -4,6 +4,7 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
+  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
@@ -88,6 +89,7 @@ const WorkspaceMainLinks = () => {
                         <link.logo /> {link.label}
                       </Link>
                     </SidebarMenuButton>
+                    {/* <SidebarMenuBadge>9</SidebarMenuBadge> */}
                   </SidebarMenuItem>
                 );
               })}

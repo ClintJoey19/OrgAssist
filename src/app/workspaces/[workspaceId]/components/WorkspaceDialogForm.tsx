@@ -16,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,7 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z
@@ -40,15 +39,18 @@ const WorkspaceDialogForm = () => {
       name: "New workspace",
     },
   });
-  const router = useRouter();
+  // const router = useRouter();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      setIsSubmitting(true);
       console.log(values);
 
       // route to new workspace if success
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -82,7 +84,11 @@ const WorkspaceDialogForm = () => {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="New workspace" {...field} />
+                        <Input
+                          placeholder="New workspace"
+                          {...field}
+                          disabled={isSubmitting}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -90,7 +96,9 @@ const WorkspaceDialogForm = () => {
                 />
               </DialogHeader>
               <DialogFooter>
-                <Button type="submit">Create</Button>
+                <Button type="submit" disabled={isSubmitting}>
+                  Create
+                </Button>
               </DialogFooter>
             </form>
           </Form>

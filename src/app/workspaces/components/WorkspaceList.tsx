@@ -51,7 +51,7 @@ const workspaces: Workspace[] = [
 
 const WorkspaceList = () => {
   return workspaces.map((workspace) => (
-    <WorkspaceListItem workspace={workspace} />
+    <WorkspaceListItem key={workspace.id} workspace={workspace} />
   ));
 };
 

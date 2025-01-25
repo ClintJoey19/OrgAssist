@@ -2,13 +2,9 @@ import {
   Sidebar,
   SidebarHeader,
   SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupLabel,
+  // SidebarFooter,
   SidebarMenu,
   SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarGroupContent,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
 import WorkspaceSwitcher from "./WorkspaceSwitcher";

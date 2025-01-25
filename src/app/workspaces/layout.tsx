@@ -20,7 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${instrumentSans.className} antialiased`}>
-        <ThemeProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
           <main className="bg-background text-foreground">{children}</main>
         </ThemeProvider>
       </body>

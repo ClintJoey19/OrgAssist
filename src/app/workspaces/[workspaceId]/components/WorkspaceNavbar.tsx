@@ -5,7 +5,7 @@ import Auth from "@/components/auth/Auth";
 
 const WorkspaceNavbar = () => {
   return (
-    <div className="h-[7vh] w-full flex justify-between items-center border-b border-muted px-4">
+    <div className="h-[66px] w-full bg-card flex justify-between items-center border-b border-muted px-4">
       <div className="h-full flex items-center gap-2">
         <SidebarTrigger />
         <Logo />

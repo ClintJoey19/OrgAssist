@@ -22,11 +22,13 @@ export default function RootLayout({
       <body className={`${instrumentSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <main className="bg-background text-foreground">{children}</main>
+          <main className="bg-primary-foreground text-foreground">
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>

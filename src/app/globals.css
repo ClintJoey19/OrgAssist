@@ -109,6 +109,14 @@ body {
     @apply text-xl font-medium;
   }
 
+  .title {
+    @apply text-sm font-medium;
+  }
+
+  .sub-text {
+    @apply text-sm text-muted-foreground;
+  }
+
   .container {
     @apply w-full max-w-[1220px] mx-auto p-4;
   }

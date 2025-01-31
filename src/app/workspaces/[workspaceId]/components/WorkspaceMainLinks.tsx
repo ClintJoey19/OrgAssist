@@ -40,7 +40,7 @@ const sidebarGroups = [
     label: "My Tickets",
     links: [
       {
-        label: "Create Ticket",
+        label: "Create ticket",
         logo: TicketPlus,
         href: "create-ticket",
       },
@@ -60,7 +60,7 @@ const sidebarGroups = [
         href: "settings",
       },
       {
-        label: "Support & Feedback",
+        label: "Support & feedback",
         logo: CircleHelp,
         href: "support",
       },

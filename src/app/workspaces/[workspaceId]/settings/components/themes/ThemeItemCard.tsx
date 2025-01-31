@@ -33,7 +33,7 @@ const ThemeItemCard = forwardRef<HTMLDivElement, Props>(
           </div>
           {currentMode === mode && <CheckButton />}
         </div>
-        <div className="bg-muted p-2 my-4 rounded-sm">
+        <div className="p-2 my-4 rounded-sm">
           <ThemeComponent theme={mode === "system" ? systemTheme : mode} />
         </div>
         <div className="flex flex-col">

@@ -1,5 +1,5 @@
 import React from "react";
-import TicketConfigurations from "./components/ticket-configuration/TicketConfigurations";
+import TicketConfigurations from "./components/ticket-groups/TicketConfigurations";
 
 const page = () => {
   return (

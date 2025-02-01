@@ -35,17 +35,19 @@ const adminLinks = [
   },
 ];
 
-const WorkspaceAdminLinks = () => {
-  const { workspaceId } = useParams();
-  const pathname = usePathname();
+type Props = {
+  workspaceId: string | string[] | undefined;
+  mainPath: string;
+};
 
+const WorkspaceAdminLinks = ({ workspaceId, mainPath }: Props) => {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Administration</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
           {adminLinks.map((link) => {
-            const isActive = pathname.includes(link.href);
+            const isActive = mainPath === link.href;
 
             return (
               <SidebarMenuItem key={link.label}>

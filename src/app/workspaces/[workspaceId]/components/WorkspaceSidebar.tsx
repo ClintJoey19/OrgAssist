@@ -12,6 +12,7 @@ import WorkspaceMainLinks from "./WorkspaceMainLinks";
 import PinnedTicketsGroup from "./pinned-tickets/PinnedTicketsGroup";
 import WorkspaceStaffLinks from "./IT-staff/WorkspaceStaffLinks";
 import WorkspaceAdminLinks from "./IT-admin/WorkspaceAdminLinks";
+import WorkspaceSidebarContent from "./WorkspaceSidebarContent";
 
 const AppSidebar = () => {
   return (
@@ -24,12 +25,7 @@ const AppSidebar = () => {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarSeparator />
-      <SidebarContent>
-        <WorkspaceMainLinks />
-        <WorkspaceStaffLinks />
-        <WorkspaceAdminLinks />
-        <PinnedTicketsGroup />
-      </SidebarContent>
+      <WorkspaceSidebarContent />
       {/* <SidebarFooter>Footer</SidebarFooter> */}
     </Sidebar>
   );

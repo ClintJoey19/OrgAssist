@@ -1,4 +1,3 @@
-"use client";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -15,9 +14,9 @@ import {
   Settings,
   Ticket,
   TicketPlus,
+  UserRoundPen,
 } from "lucide-react";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
 import React from "react";
 
 const sidebarGroups = [
@@ -49,6 +48,11 @@ const sidebarGroups = [
         logo: Ticket,
         href: "tickets",
       },
+      {
+        label: "Tickets to approve",
+        logo: UserRoundPen,
+        href: "approve-tickets",
+      },
     ],
   },
   {
@@ -68,10 +72,12 @@ const sidebarGroups = [
   },
 ];
 
-const WorkspaceMainLinks = () => {
-  const { workspaceId } = useParams();
-  const pathname = usePathname();
+type Props = {
+  workspaceId: string | string[] | undefined;
+  mainPath: string;
+};
 
+const WorkspaceMainLinks = ({ workspaceId, mainPath }: Props) => {
   return (
     <>
       {sidebarGroups.map((group) => (
@@ -80,7 +86,7 @@ const WorkspaceMainLinks = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {group.links.map((link) => {
-                const isActive = pathname.includes(link.href);
+                const isActive = mainPath === link.href;
 
                 return (
                   <SidebarMenuItem key={link.label}>

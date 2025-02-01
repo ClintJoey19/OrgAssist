@@ -17,7 +17,7 @@ const TicketGroupItem = forwardRef<HTMLDivElement, Props>(({ group }, ref) => {
   return (
     <Card ref={ref} className="overflow-hidden">
       <Link
-        href={`/workspaces/${workspaceId}/workspace-configuration/tickets/${id}`}
+        href={`/workspaces/${workspaceId}/workspace-configuration/ticket-groups/${id}`}
         className="grid grid-cols-[80px_1fr]"
       >
         <div className="h-20 w-20 aspect-square relative">

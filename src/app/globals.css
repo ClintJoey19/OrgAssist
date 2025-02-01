@@ -120,4 +120,8 @@ body {
   .container {
     @apply w-full max-w-[1220px] mx-auto p-4;
   }
+
+  .workspace-page {
+    @apply w-full max-w-[1660px] flex flex-col gap-4 p-4;
+  }
 }

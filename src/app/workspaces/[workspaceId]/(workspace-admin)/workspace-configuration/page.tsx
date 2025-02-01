@@ -3,7 +3,7 @@ import TicketConfigurations from "./components/ticket-groups/TicketConfiguration
 
 const page = () => {
   return (
-    <section className="flex flex-col gap-4 p-4">
+    <section className="workspace-page">
       <div className="flex justify-between items-center gap-4">
         <h3 className="h3">Workspace configuration</h3>
       </div>

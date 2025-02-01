@@ -3,7 +3,7 @@ import ThemeListItems from "./components/themes/ThemeListItems";
 
 const page = () => {
   return (
-    <section className="flex flex-col gap-4 p-4">
+    <section className="workspace-page">
       <div>
         <h3 className="h3">Settings</h3>
       </div>

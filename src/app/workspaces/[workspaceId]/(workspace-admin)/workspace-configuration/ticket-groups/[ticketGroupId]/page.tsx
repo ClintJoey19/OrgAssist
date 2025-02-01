@@ -7,7 +7,14 @@ const page = async ({
 }) => {
   const { ticketGroupId } = await params;
 
-  return <div>page</div>;
+  return (
+    <section className="workspace-page">
+      <div>
+        <h3 className="h3">Ticket groups</h3>
+      </div>
+      <div>Content here</div>
+    </section>
+  );
 };
 
 export default page;

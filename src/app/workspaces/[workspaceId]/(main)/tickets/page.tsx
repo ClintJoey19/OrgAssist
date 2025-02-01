@@ -2,7 +2,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <section className="flex flex-col gap-4 p-4">
+    <section className="workspace-page">
       <div>
         <h3 className="h3">Tickets</h3>
       </div>

@@ -9,8 +9,6 @@ import {
 } from "@/components/ui/sidebar";
 import {
   CircleHelp,
-  LayoutGrid,
-  Mail,
   Settings,
   Ticket,
   TicketPlus,
@@ -20,21 +18,6 @@ import Link from "next/link";
 import React from "react";
 
 const sidebarGroups = [
-  {
-    label: "General",
-    links: [
-      {
-        label: "Dashboard",
-        logo: LayoutGrid,
-        href: "dashboard",
-      },
-      {
-        label: "Messages",
-        logo: Mail,
-        href: "messages",
-      },
-    ],
-  },
   {
     label: "My Tickets",
     links: [

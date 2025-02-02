@@ -122,6 +122,6 @@ body {
   }
 
   .workspace-page {
-    @apply w-full max-w-[1660px] flex flex-col gap-4 p-4;
+    @apply w-full max-w-[1660px] mx-auto flex flex-col gap-4 p-4;
   }
 }

@@ -14,7 +14,7 @@ const page = async ({
 
   if (!workspaceId) redirect("/workspaces");
 
-  redirect(`/workspaces/${workspaceId}/dashboard`);
+  redirect(`/workspaces/${workspaceId}/create-ticket`);
 };
 
 export default page;

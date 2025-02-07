@@ -1,5 +1,34 @@
 import React from "react";
-import WorkspaceConfigurationNavigations from "./components/WorkspaceConfigurationNavigations";
+import NavigationGroup from "../../../../../components/global/NavigationGroup";
+import { Mails, Tickets, UserRoundCog, Workflow } from "lucide-react";
+
+const navigationLinks = [
+  {
+    label: "Email templates",
+    logo: <Mails />,
+    href: "email-templates",
+  },
+  {
+    label: "System roles",
+    logo: <UserRoundCog />,
+    href: "system-roles",
+  },
+  {
+    label: "Ticket categories",
+    logo: <Tickets />,
+    href: "ticket-categories",
+  },
+  {
+    label: "Ticket groups",
+    logo: <Tickets />,
+    href: "ticket-groups",
+  },
+  {
+    label: "Workflows",
+    logo: <Workflow />,
+    href: "workflows",
+  },
+];
 
 const page = () => {
   return (
@@ -18,7 +47,7 @@ const page = () => {
           <div>
             <h4 className="h4">Setup</h4>
           </div>
-          <WorkspaceConfigurationNavigations />
+          <NavigationGroup navigationLinks={navigationLinks} />
         </div>
       </div>
     </section>

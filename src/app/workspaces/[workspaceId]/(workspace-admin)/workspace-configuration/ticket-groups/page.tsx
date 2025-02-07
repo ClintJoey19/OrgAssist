@@ -17,7 +17,12 @@ const page = () => {
           <TicketGroupActions />
         </div>
       </div>
-      <TicketGroups />
+      <div className="flex flex-col gap-4">
+        <div className="flex items-start justify-end gap-4">
+          Filters and Search
+        </div>
+        <TicketGroups />
+      </div>
     </section>
   );
 };

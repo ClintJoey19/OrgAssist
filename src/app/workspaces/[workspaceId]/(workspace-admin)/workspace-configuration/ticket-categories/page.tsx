@@ -1,4 +1,6 @@
 import React from "react";
+import TicketCategoriesList from "./components/TicketCategoriesList";
+import TicketCategoryActions from "./components/TicketCategoryActions";
 
 const page = () => {
   return (
@@ -11,8 +13,16 @@ const page = () => {
             excepturi temporibus vitae! Aut, soluta commodi!
           </p>
         </div>
+        <div>
+          <TicketCategoryActions />
+        </div>
       </div>
-      <div>Content here</div>
+      <div className="flex flex-col gap-4">
+        <div className="flex items-start justify-end gap-4">
+          Filters and Search
+        </div>
+        <TicketCategoriesList />
+      </div>
     </section>
   );
 };

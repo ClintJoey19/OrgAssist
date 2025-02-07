@@ -3,7 +3,7 @@ import TicketGroupItem from "./TicketGroupItem";
 
 export type TicketGroup = {
   id: string;
-  // workspaceOwner: string;
+  // workspaceId: string;
   name: string;
   description: string;
   logo: string;

@@ -1,6 +1,7 @@
 import React from "react";
 import TicketCategoriesList from "./components/TicketCategoriesList";
 import TicketCategoryActions from "./components/TicketCategoryActions";
+import TicketCategorySearchFilters from "./components/TicketCategorySearchFilters";
 
 const page = () => {
   return (
@@ -19,7 +20,7 @@ const page = () => {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex items-start justify-end gap-4">
-          Filters and Search
+          <TicketCategorySearchFilters />
         </div>
         <TicketCategoriesList />
       </div>

@@ -49,7 +49,7 @@ const CustomFilters = () => {
   return (
     <Popover open={isOpen} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="sm">
+        <Button variant="outline" size="sm">
           <Filter className="h-5 w-5" />
           Filters
         </Button>
@@ -87,7 +87,7 @@ const CustomFilters = () => {
           </div>
           <Separator />
           <div className="flex items-center justify-between gap-2">
-            <Button variant="ghost" size="sm" onClick={handleClearFilters}>
+            <Button variant="outline" size="sm" onClick={handleClearFilters}>
               Clear
             </Button>
             <Button size="sm" onClick={handleApplyFilters}>

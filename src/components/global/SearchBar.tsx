@@ -24,7 +24,7 @@ const SearchBar = ({ placeholder }: Props) => {
         <Search className="h-4 w-4 text-muted-foreground" />
       </div>
       <Input
-        className="pl-8"
+        className="pl-8 bg-background"
         placeholder={placeholder ? placeholder : "Search"}
       />
     </div>

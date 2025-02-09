@@ -7,12 +7,8 @@ const TicketCategorySearchFilters = () => {
   return (
     <div className="flex gap-2 items-center">
       <SearchBar placeholder="Search ticket categories" />
-      <div>
-        <CustomFilters />
-      </div>
-      <div>
-        <CustomSort />
-      </div>
+      <CustomFilters />
+      <CustomSort />
     </div>
   );
 };

@@ -15,7 +15,7 @@ const NavigationButton = forwardRef<HTMLButtonElement, Props>(
 
     return (
       <Button
-        variant="ghost"
+        variant="outline"
         ref={ref}
         className="flex justify-start items-center gap-2"
         asChild

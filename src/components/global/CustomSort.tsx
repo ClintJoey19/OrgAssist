@@ -46,7 +46,7 @@ const CustomSort = () => {
   return (
     <Popover open={isOpen} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="sm">
+        <Button variant="outline" size="sm">
           <ArrowDownUp className="h-5 w-5" />
           Sort
         </Button>
@@ -90,7 +90,7 @@ const CustomSort = () => {
           </div>
           <Separator />
           <div className="flex justify-between items-center gap-4">
-            <Button size="sm" variant="ghost" onClick={handleClearSort}>
+            <Button size="sm" variant="outline" onClick={handleClearSort}>
               Clear
             </Button>
             <Button size="sm" onClick={handleApplySort}>

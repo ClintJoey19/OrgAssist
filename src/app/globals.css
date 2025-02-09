@@ -118,7 +118,7 @@ body {
   }
 
   .group-label {
-    @apply text-xs text-muted-foreground font-bold;
+    @apply text-xs text-muted-foreground font-semibold;
   }
 
   .container {

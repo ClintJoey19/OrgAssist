@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PlusCircle } from "lucide-react";
 
-const TicketCategoryActions = () => {
+const CreateTicketCategoryForm = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -40,4 +40,4 @@ const TicketCategoryActions = () => {
   );
 };
 
-export default TicketCategoryActions;
+export default CreateTicketCategoryForm;

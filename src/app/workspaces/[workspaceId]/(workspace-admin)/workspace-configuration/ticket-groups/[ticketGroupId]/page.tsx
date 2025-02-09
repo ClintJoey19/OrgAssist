@@ -1,7 +1,7 @@
 import React from "react";
 import TicketCategoriesList from "../../ticket-categories/components/TicketCategoriesList";
-import TicketCategoryActions from "../../ticket-categories/components/TicketCategoryActions";
 import TicketCategorySearchFilters from "../../ticket-categories/components/TicketCategorySearchFilters";
+import CreateTicketCategoryForm from "../../ticket-categories/forms/CreateTicketCategoryForm";
 
 type Params = {
   ticketGroupId: string;
@@ -21,7 +21,7 @@ const page = async ({ params }: { params: Promise<Params> }) => {
           </p>
         </div>
         <div>
-          <TicketCategoryActions />
+          <CreateTicketCategoryForm />
         </div>
       </div>
       <div className="flex flex-col gap-4">

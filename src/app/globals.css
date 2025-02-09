@@ -117,6 +117,10 @@ body {
     @apply text-sm text-muted-foreground;
   }
 
+  .group-label {
+    @apply text-xs text-muted-foreground font-bold;
+  }
+
   .container {
     @apply w-full max-w-[1220px] mx-auto p-4;
   }

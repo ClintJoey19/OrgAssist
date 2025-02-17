@@ -38,7 +38,7 @@ const fields = [
 
 const FormBuilderFields = () => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <span className="group-label">Form fields</span>
       <div className="flex flex-col gap-2">
         {fields.map((field) => (

@@ -19,18 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${instrumentSans.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <RootNavbar />
-          <main className="pt-[8vh]">{children}</main>
-        </ThemeProvider>
-      </body>
-    </html>
+    <div>
+      <RootNavbar />
+      <main className="pt-[8vh]">{children}</main>
+    </div>
   );
 }

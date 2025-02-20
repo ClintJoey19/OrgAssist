@@ -1,19 +1,37 @@
 import React from "react";
-import { FormControl, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormLabel,
+  FormDescription,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
-type InputFieldType = "text" | "password" | "file" | "email" | "number";
+export type InputFieldType =
+  | "text"
+  | "password"
+  | "file"
+  | "email"
+  | "number"
+  | "date";
 
-type Props = {
-  // attribute: string;
-  // label: string;
-  // description: string;
-  // isRequired: boolean;
-  type: InputFieldType;
+export type InputFieldProps = {
+  label: string;
+  description?: string;
+  fieldAttributes: {
+    type?: InputFieldType;
+    required?: boolean;
+    placeholder?: string;
+    disabled?: boolean;
+  };
 };
 
-const InputFieldForm = ({ type = "text" }: Props) => {
+const InputFieldForm = ({
+  label,
+  description,
+  fieldAttributes,
+}: InputFieldProps) => {
   return (
     <div className="flex flex-col gap-2">
       {/* <FormLabel>Input Field</FormLabel>
@@ -21,8 +39,8 @@ const InputFieldForm = ({ type = "text" }: Props) => {
         <Input placeholder="Input Field" />
       </FormControl>
       <FormMessage /> */}
-      <Label>Input Field</Label>
-      <Input placeholder="Input Field" type={type} />
+      <Label>{label}</Label>
+      <Input {...fieldAttributes} />
     </div>
   );
 };

@@ -16,7 +16,7 @@ type FormField = {
   type: FormFieldType;
 };
 
-type FormContent = {
+export type FormContent = {
   id: string;
   name: string;
   description: string;

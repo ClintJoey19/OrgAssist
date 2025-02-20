@@ -3,11 +3,24 @@ import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "../ui/label";
 
-const SwitchFieldForm = () => {
+export type SwitchFieldProps = {
+  label: string;
+  description?: string;
+  fieldAttributes: {
+    required?: boolean;
+    disabled?: boolean;
+  };
+};
+
+const SwitchFieldForm = ({
+  label,
+  description,
+  fieldAttributes,
+}: SwitchFieldProps) => {
   return (
     <div className="flex justify-between items-start gap-4">
-      <Label>Switch Field</Label>
-      <Switch />
+      <Label>{label}</Label>
+      <Switch {...fieldAttributes} />
     </div>
   );
 

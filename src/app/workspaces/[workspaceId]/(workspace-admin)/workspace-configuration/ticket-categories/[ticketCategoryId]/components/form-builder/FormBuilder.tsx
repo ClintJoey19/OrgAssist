@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import DotBackground from "@/components/backgrounds/DotBackground";
-import FormContentHeader from "../form-content/FormContentHeader";
-import FormContentFormFields from "../form-content/FormContentFormFields";
 import FormBuilderProvider from "@/providers/form-builder-provider";
+import FormBuilderSidebar from "./FormBuilderSidebar";
+import { DndContext } from "@dnd-kit/core";
+import FormContent from "../form-content/FormContent";
 
 type Props = {
   ticketCategoryId: string;
@@ -10,15 +12,19 @@ type Props = {
 
 const FormBuilder = ({ ticketCategoryId }: Props) => {
   return (
-    <div className="h-full w-full relative shadow-md">
-      <DotBackground />
-      <FormBuilderProvider value={null}>
-        <div className="h-[96%] min-w-[350px] max-w-[720px] flex flex-col gap-4 bg-background absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-y-auto p-4 border border-muted shadow-md z-2">
-          <FormContentHeader ticketCategoryId={ticketCategoryId} />
-          <FormContentFormFields />
-        </div>
-      </FormBuilderProvider>
-    </div>
+    <FormBuilderProvider value={null}>
+      <DndContext>
+        <section className="h-[93vh] grid grid-cols-[1fr_300px]">
+          <div className="w-full h-full flex flex-grow flex-col gap-4">
+            <div className="h-full w-full relative shadow-md">
+              <DotBackground />
+              <FormContent ticketCategoryId={ticketCategoryId} />
+            </div>
+          </div>
+          <FormBuilderSidebar ticketCategoryId={ticketCategoryId} />
+        </section>
+      </DndContext>
+    </FormBuilderProvider>
   );
 };
 

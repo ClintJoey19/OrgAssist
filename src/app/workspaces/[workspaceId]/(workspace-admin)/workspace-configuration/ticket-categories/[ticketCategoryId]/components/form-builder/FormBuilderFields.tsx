@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
+import { useDraggable } from "@dnd-kit/core";
 import {
+  AtSign,
+  Calendar,
   ChevronDown,
   CircleCheck,
+  Hash,
   ListChecks,
   ListTodo,
+  Lock,
   Text,
   Type,
 } from "lucide-react";
@@ -13,6 +18,22 @@ const fields = [
   {
     label: "Text field",
     logo: Type,
+  },
+  {
+    label: "Number field",
+    logo: Hash,
+  },
+  {
+    label: "Email field",
+    logo: AtSign,
+  },
+  {
+    label: "Password field",
+    logo: Lock,
+  },
+  {
+    label: "Date field",
+    logo: Calendar,
   },
   {
     label: "Long text field",
@@ -37,6 +58,13 @@ const fields = [
 ];
 
 const FormBuilderFields = () => {
+  const draggable = useDraggable({
+    id: "draggable",
+    data: {
+      isElementDraggable: true,
+    },
+  });
+
   return (
     <div className="flex flex-col gap-2">
       <span className="group-label">Form fields</span>

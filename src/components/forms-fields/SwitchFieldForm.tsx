@@ -5,6 +5,7 @@ import { Label } from "../ui/label";
 
 export type SwitchFieldProps = {
   label: string;
+  attribute: string;
   description?: string;
   fieldAttributes: {
     required?: boolean;
@@ -14,22 +15,18 @@ export type SwitchFieldProps = {
 
 const SwitchFieldForm = ({
   label,
+  attribute,
   description,
   fieldAttributes,
 }: SwitchFieldProps) => {
   return (
-    <div className="flex justify-between items-start gap-4">
-      <Label>{label}</Label>
-      <Switch {...fieldAttributes} />
-    </div>
-  );
-
-  return (
-    <FormItem className="flex flex-col gap-2">
-      <FormLabel>Switch Field</FormLabel>
-      <FormControl>
-        <Switch />
-      </FormControl>
+    <FormItem className="space-y-2">
+      <div className="flex items-start justify-between gap-2">
+        <FormLabel>{label}</FormLabel>
+        <FormControl>
+          <Switch {...fieldAttributes} />
+        </FormControl>
+      </div>
       <FormMessage />
     </FormItem>
   );

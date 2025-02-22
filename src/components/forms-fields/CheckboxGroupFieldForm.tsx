@@ -1,47 +1,47 @@
 import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "../ui/label";
+import { FormFieldOption } from "@/app/workspaces/[workspaceId]/(workspace-admin)/workspace-configuration/ticket-categories/[ticketCategoryId]/components/form-content/FormContentFormFields";
+import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
 
-const items = [
-  {
-    id: "recents",
-    label: "Recents",
-  },
-  {
-    id: "home",
-    label: "Home",
-  },
-  {
-    id: "applications",
-    label: "Applications",
-  },
-  {
-    id: "desktop",
-    label: "Desktop",
-  },
-  {
-    id: "downloads",
-    label: "Downloads",
-  },
-  {
-    id: "documents",
-    label: "Documents",
-  },
-] as const;
+export type CheckboxGroupFieldFormProps = {
+  label: string;
+  attribute: string;
+  description?: string;
+  fieldAttributes: {
+    required?: boolean;
+    disabled?: boolean;
+  };
+  extraAttributes?: {
+    options?: FormFieldOption[];
+  };
+};
 
-const CheckboxGroupFieldForm = () => {
+const CheckboxGroupFieldForm = ({
+  label,
+  attribute,
+  description,
+  fieldAttributes,
+  extraAttributes,
+}: CheckboxGroupFieldFormProps) => {
   return (
-    <div className="flex flex-col gap-2">
-      <Label>Checkbox Group Field</Label>
+    <FormItem className="space-y-2">
+      <FormLabel>{label}</FormLabel>
       <div className="grid grid-cols-2 gap-2">
-        {items.map(({ id, label }) => (
-          <div key={id} className="flex items-center gap-2">
-            <Checkbox />
-            <Label>{label}</Label>
+        {extraAttributes?.options?.map(({ label, value }) => (
+          <div
+            key={`${attribute}-${value}`}
+            className="flex items-center gap-2"
+          >
+            <FormControl>
+              <Checkbox value={value} {...fieldAttributes} />
+            </FormControl>
+            <FormLabel>{label}</FormLabel>
           </div>
         ))}
       </div>
-    </div>
+      <FormMessage />
+    </FormItem>
   );
 };
 

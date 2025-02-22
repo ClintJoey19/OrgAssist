@@ -9,11 +9,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Label } from "../ui/label";
 import { FormFieldOption } from "@/app/workspaces/[workspaceId]/(workspace-admin)/workspace-configuration/ticket-categories/[ticketCategoryId]/components/form-content/FormContentFormFields";
 
 export type SelectFieldFormProps = {
   label: string;
+  attribute: string;
   description?: string;
   fieldAttributes: {
     required?: boolean;
@@ -28,33 +28,15 @@ export type SelectFieldFormProps = {
 
 const SelectFieldForm = ({
   label,
+  attribute,
   description,
   fieldAttributes,
   extraAttributes,
 }: SelectFieldFormProps) => {
   return (
     <div className="flex justify-between items-start gap-4">
-      {/* <FormLabel>Select Field</FormLabel>
+      <FormLabel>{label}</FormLabel>
       <FormControl>
-        <Select>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select a fruit" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </FormControl>
-      <FormMessage /> */}
-      <Label>{label}</Label>
-      <div className="flex justify-end">
         <Select {...fieldAttributes}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder={fieldAttributes.placeholder} />
@@ -63,14 +45,15 @@ const SelectFieldForm = ({
             <SelectGroup>
               <SelectLabel>{extraAttributes?.groupLabel}</SelectLabel>
               {extraAttributes?.options?.map(({ label, value }) => (
-                <SelectItem key={label} value={value}>
+                <SelectItem key={`${attribute}-${value}`} value={value}>
                   {label}
                 </SelectItem>
               ))}
             </SelectGroup>
           </SelectContent>
         </Select>
-      </div>
+      </FormControl>
+      <FormMessage />
     </div>
   );
 };

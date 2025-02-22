@@ -4,6 +4,7 @@ import {
   FormLabel,
   FormDescription,
   FormMessage,
+  FormItem,
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -18,6 +19,7 @@ export type InputFieldType =
 
 export type InputFieldProps = {
   label: string;
+  attribute: string;
   description?: string;
   fieldAttributes: {
     type?: InputFieldType;
@@ -29,18 +31,19 @@ export type InputFieldProps = {
 
 const InputFieldForm = ({
   label,
+  attribute,
   description,
   fieldAttributes,
 }: InputFieldProps) => {
   return (
     <div className="flex flex-col gap-2">
-      {/* <FormLabel>Input Field</FormLabel>
-      <FormControl>
-        <Input placeholder="Input Field" />
-      </FormControl>
-      <FormMessage /> */}
-      <Label>{label}</Label>
-      <Input {...fieldAttributes} />
+      <FormItem>
+        <FormLabel>{label}</FormLabel>
+        <FormControl>
+          <Input {...fieldAttributes} />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
     </div>
   );
 };

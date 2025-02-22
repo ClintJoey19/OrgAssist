@@ -7,11 +7,12 @@ import InputFieldForm, {
   InputFieldProps,
   InputFieldType,
 } from "@/components/forms-fields/InputFieldForm";
-import RadioGroupFieldForm from "@/components/forms-fields/RadioGroupFieldForm";
+import RadioGroupFieldForm, {
+  RadioGroupFieldProps,
+} from "@/components/forms-fields/RadioGroupFieldForm";
 import SelectFieldForm, {
   SelectFieldFormProps,
 } from "@/components/forms-fields/SelectFieldForm";
-import SubmitButtonForm from "@/components/forms-fields/SubmitButtonForm";
 import SwitchFieldForm, {
   SwitchFieldProps,
 } from "@/components/forms-fields/SwitchFieldForm";
@@ -19,12 +20,18 @@ import TextareaFieldForm, {
   TextareaFieldProps,
 } from "@/components/forms-fields/TextareaFieldForm";
 import { useDroppable } from "@dnd-kit/core";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Form } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
 
 type FormFieldProps =
   | InputFieldProps
   | TextareaFieldProps
   | SelectFieldFormProps
   | SwitchFieldProps
+  | RadioGroupFieldProps
   | CheckboxFieldProps;
 
 export type FormFieldOption = {
@@ -34,6 +41,7 @@ export type FormFieldOption = {
 
 type FormFieldElement = {
   label: string;
+  attribute: string;
   description?: string;
   fieldAttributes: {
     type?: InputFieldType;
@@ -51,6 +59,7 @@ type FormFieldElement = {
 const elements: FormFieldElement[] = [
   {
     label: "First name",
+    attribute: "firstname",
     description: "optional",
     element: InputFieldForm,
     fieldAttributes: {
@@ -61,6 +70,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "Last name",
+    attribute: "lastname",
     description: "optional",
     element: InputFieldForm,
     fieldAttributes: {
@@ -71,6 +81,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "Age",
+    attribute: "age",
     description: "optional",
     element: InputFieldForm,
     fieldAttributes: {
@@ -81,6 +92,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "Email",
+    attribute: "email",
     description: "optional",
     element: InputFieldForm,
     fieldAttributes: {
@@ -91,6 +103,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "Password",
+    attribute: "password",
     description: "optional",
     element: InputFieldForm,
     fieldAttributes: {
@@ -101,6 +114,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "File",
+    attribute: "file",
     description: "optional",
     element: InputFieldForm,
     fieldAttributes: {
@@ -111,6 +125,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "Date",
+    attribute: "date",
     description: "optional",
     element: InputFieldForm,
     fieldAttributes: {
@@ -121,6 +136,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "Message",
+    attribute: "message",
     description: "optional",
     element: TextareaFieldForm,
     fieldAttributes: {
@@ -130,6 +146,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "Fruits",
+    attribute: "fruit",
     description: "optional",
     element: SelectFieldForm,
     fieldAttributes: {
@@ -155,7 +172,58 @@ const elements: FormFieldElement[] = [
     },
   },
   {
+    label: "Organization",
+    attribute: "organization",
+    description: "optional",
+    element: RadioGroupFieldForm,
+    fieldAttributes: {
+      required: true,
+    },
+    extraAttributes: {
+      options: [
+        {
+          label: "School",
+          value: "school",
+        },
+        {
+          label: "Business",
+          value: "business",
+        },
+        {
+          label: "Company",
+          value: "company",
+        },
+      ],
+    },
+  },
+  {
+    label: "Building",
+    attribute: "building",
+    description: "optional",
+    element: CheckboxGroupFieldForm,
+    fieldAttributes: {
+      required: true,
+    },
+    extraAttributes: {
+      options: [
+        {
+          label: "School",
+          value: "school",
+        },
+        {
+          label: "Business",
+          value: "business",
+        },
+        {
+          label: "Company",
+          value: "company",
+        },
+      ],
+    },
+  },
+  {
     label: "Use print management",
+    attribute: "usePrintManagement",
     description: "optional",
     element: SwitchFieldForm,
     fieldAttributes: {
@@ -164,6 +232,7 @@ const elements: FormFieldElement[] = [
   },
   {
     label: "Accept terms and conditions",
+    attribute: "isAccepted",
     description: "optional",
     element: CheckboxFieldForm,
     fieldAttributes: {
@@ -172,42 +241,64 @@ const elements: FormFieldElement[] = [
   },
 ];
 
+const formSchema = z.object({});
+
+// type Props = {
+//   elements: FormFieldElement[];
+//   schema:
+// }
+
 const FormContentFormFields = () => {
-  const droppable = useDroppable({
-    id: "form-builder-area",
-    data: {
-      isDesignerDroppableArea: true,
-    },
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {},
   });
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      console.log(values);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-4">
-        {elements.map(
-          ({
-            label,
-            description,
-            fieldAttributes,
-            extraAttributes,
-            element: Element,
-          }) => (
-            <React.Fragment key={label}>
-              {
-                <Element
-                  label={label}
-                  description={description}
-                  fieldAttributes={{ ...fieldAttributes }}
-                  extraAttributes={extraAttributes}
-                />
-              }
-            </React.Fragment>
-          )
-        )}
-      </div>
-      <div className="my-4">
-        <SubmitButtonForm />
-      </div>
-    </div>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4"
+      >
+        <div className="flex flex-col gap-4">
+          {elements.map(
+            ({
+              label,
+              attribute,
+              description,
+              fieldAttributes,
+              extraAttributes,
+              element: Element,
+            }) => (
+              <React.Fragment key={label}>
+                {
+                  <Element
+                    label={label}
+                    attribute={attribute}
+                    description={description}
+                    fieldAttributes={{ ...fieldAttributes, disabled: true }}
+                    extraAttributes={extraAttributes}
+                  />
+                }
+              </React.Fragment>
+            )
+          )}
+        </div>
+        <div className="my-4">
+          <Button type="submit" className="w-full">
+            Submit
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 };
 

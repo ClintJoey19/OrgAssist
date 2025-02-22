@@ -1,10 +1,17 @@
 import React from "react";
 import { Checkbox } from "../ui/checkbox";
-import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { FormSchema } from "@/app/workspaces/[workspaceId]/(workspace-admin)/workspace-configuration/ticket-categories/[ticketCategoryId]/components/form-content/FormContentFormFields";
 
 export type CheckboxFieldProps = {
   label: string;
-  attribute: string;
+  attribute: keyof FormSchema;
   description?: string;
   fieldAttributes: {
     required?: boolean;
@@ -18,11 +25,14 @@ const CheckboxFieldForm = ({
   fieldAttributes,
 }: CheckboxFieldProps) => {
   return (
-    <FormItem className="space-x-2">
+    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
       <FormControl>
         <Checkbox {...fieldAttributes} />
       </FormControl>
-      <FormLabel>{label}</FormLabel>
+      <div className="space-y-1 leading-none">
+        <FormLabel>{label}</FormLabel>
+        {description && <FormDescription>{description}</FormDescription>}
+      </div>
       <FormMessage />
     </FormItem>
   );

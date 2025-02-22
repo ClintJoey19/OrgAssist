@@ -1,11 +1,20 @@
 import React from "react";
-import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { FormFieldOption } from "@/app/workspaces/[workspaceId]/(workspace-admin)/workspace-configuration/ticket-categories/[ticketCategoryId]/components/form-content/FormContentFormFields";
+import {
+  FormFieldOption,
+  FormSchema,
+} from "@/app/workspaces/[workspaceId]/(workspace-admin)/workspace-configuration/ticket-categories/[ticketCategoryId]/components/form-content/FormContentFormFields";
 
 export type RadioGroupFieldProps = {
   label: string;
-  attribute: string;
+  attribute: keyof FormSchema;
   description?: string;
   fieldAttributes: {
     required?: boolean;
@@ -25,7 +34,10 @@ const RadioGroupFieldForm = ({
 }: RadioGroupFieldProps) => {
   return (
     <FormItem className="flex flex-col gap-2">
-      <FormLabel>{label}</FormLabel>
+      <div className="flex flex-col gap-1">
+        <FormLabel>{label}</FormLabel>
+        {description && <FormDescription>{description}</FormDescription>}
+      </div>
       <FormControl>
         <RadioGroup defaultValue="comfortable" {...fieldAttributes}>
           {extraAttributes?.options?.map(({ label, value }) => (

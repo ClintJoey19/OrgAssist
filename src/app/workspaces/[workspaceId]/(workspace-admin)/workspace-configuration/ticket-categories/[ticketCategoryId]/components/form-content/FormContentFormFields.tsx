@@ -1,47 +1,56 @@
 import React from "react";
-import CheckboxFieldForm, {
-  CheckboxFieldProps,
-} from "@/components/forms-fields/CheckboxFieldForm";
+import CheckboxFieldForm from "@/components/forms-fields/CheckboxFieldForm";
 import CheckboxGroupFieldForm from "@/components/forms-fields/CheckboxGroupFieldForm";
 import InputFieldForm, {
-  InputFieldProps,
   InputFieldType,
 } from "@/components/forms-fields/InputFieldForm";
-import RadioGroupFieldForm, {
-  RadioGroupFieldProps,
-} from "@/components/forms-fields/RadioGroupFieldForm";
-import SelectFieldForm, {
-  SelectFieldFormProps,
-} from "@/components/forms-fields/SelectFieldForm";
-import SwitchFieldForm, {
-  SwitchFieldProps,
-} from "@/components/forms-fields/SwitchFieldForm";
-import TextareaFieldForm, {
-  TextareaFieldProps,
-} from "@/components/forms-fields/TextareaFieldForm";
+import RadioGroupFieldForm from "@/components/forms-fields/RadioGroupFieldForm";
+import SelectFieldForm from "@/components/forms-fields/SelectFieldForm";
+import SwitchFieldForm from "@/components/forms-fields/SwitchFieldForm";
+import TextareaFieldForm from "@/components/forms-fields/TextareaFieldForm";
 import { useDroppable } from "@dnd-kit/core";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form } from "@/components/ui/form";
+import { Form, FormField } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 
-type FormFieldProps =
-  | InputFieldProps
-  | TextareaFieldProps
-  | SelectFieldFormProps
-  | SwitchFieldProps
-  | RadioGroupFieldProps
-  | CheckboxFieldProps;
+const formSchema = z.object({
+  firstname: z.string().min(1, { message: "First name field is required" }),
+  lastname: z.string().min(1, { message: "Last name field is required" }),
+  age: z.number().min(1, { message: "Enter a valid age value" }),
+  email: z.string().email({ message: "Enter a valid email" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long" }),
+  file: z.instanceof(File, { message: "File field is required" }),
+  date: z.date({ message: "Date field is required" }),
+  message: z.string().min(1, { message: "Message field is required" }),
+  fruit: z.string({ message: "Fruit field is required" }),
+  organization: z.string({ message: "Organization field is required" }),
+  usePrintManagement: z.boolean().default(false),
+  isAccepted: z.boolean().default(false),
+});
+
+export type FormSchema = z.infer<typeof formSchema>;
 
 export type FormFieldOption = {
   label: string;
   value: string;
 };
 
+type FormFieldType =
+  | "InputField"
+  | "TextareaField"
+  | "SelectField"
+  | "SwitchField"
+  | "RadioGroupField"
+  | "CheckboxField"
+  | "CheckboxGroupField";
+
 type FormFieldElement = {
   label: string;
-  attribute: string;
+  attribute: keyof FormSchema;
   description?: string;
   fieldAttributes: {
     type?: InputFieldType;
@@ -53,7 +62,7 @@ type FormFieldElement = {
     groupLabel?: string;
     options?: FormFieldOption[];
   };
-  element: React.ComponentType<FormFieldProps>;
+  element: FormFieldType;
 };
 
 const elements: FormFieldElement[] = [
@@ -61,7 +70,7 @@ const elements: FormFieldElement[] = [
     label: "First name",
     attribute: "firstname",
     description: "optional",
-    element: InputFieldForm,
+    element: "InputField",
     fieldAttributes: {
       type: "text",
       placeholder: "First name",
@@ -72,7 +81,7 @@ const elements: FormFieldElement[] = [
     label: "Last name",
     attribute: "lastname",
     description: "optional",
-    element: InputFieldForm,
+    element: "InputField",
     fieldAttributes: {
       type: "text",
       placeholder: "Last name",
@@ -83,7 +92,7 @@ const elements: FormFieldElement[] = [
     label: "Age",
     attribute: "age",
     description: "optional",
-    element: InputFieldForm,
+    element: "InputField",
     fieldAttributes: {
       type: "number",
       placeholder: "Age",
@@ -94,7 +103,7 @@ const elements: FormFieldElement[] = [
     label: "Email",
     attribute: "email",
     description: "optional",
-    element: InputFieldForm,
+    element: "InputField",
     fieldAttributes: {
       type: "email",
       placeholder: "Email",
@@ -105,7 +114,7 @@ const elements: FormFieldElement[] = [
     label: "Password",
     attribute: "password",
     description: "optional",
-    element: InputFieldForm,
+    element: "InputField",
     fieldAttributes: {
       type: "password",
       placeholder: "Password",
@@ -116,7 +125,7 @@ const elements: FormFieldElement[] = [
     label: "File",
     attribute: "file",
     description: "optional",
-    element: InputFieldForm,
+    element: "InputField",
     fieldAttributes: {
       type: "file",
       placeholder: "File",
@@ -127,7 +136,7 @@ const elements: FormFieldElement[] = [
     label: "Date",
     attribute: "date",
     description: "optional",
-    element: InputFieldForm,
+    element: "InputField",
     fieldAttributes: {
       type: "date",
       placeholder: "Date",
@@ -138,7 +147,7 @@ const elements: FormFieldElement[] = [
     label: "Message",
     attribute: "message",
     description: "optional",
-    element: TextareaFieldForm,
+    element: "TextareaField",
     fieldAttributes: {
       placeholder: "Write a message...",
       required: true,
@@ -148,7 +157,7 @@ const elements: FormFieldElement[] = [
     label: "Fruits",
     attribute: "fruit",
     description: "optional",
-    element: SelectFieldForm,
+    element: "SelectField",
     fieldAttributes: {
       placeholder: "Select fruits",
       required: true,
@@ -175,7 +184,7 @@ const elements: FormFieldElement[] = [
     label: "Organization",
     attribute: "organization",
     description: "optional",
-    element: RadioGroupFieldForm,
+    element: "RadioGroupField",
     fieldAttributes: {
       required: true,
     },
@@ -196,36 +205,36 @@ const elements: FormFieldElement[] = [
       ],
     },
   },
-  {
-    label: "Building",
-    attribute: "building",
-    description: "optional",
-    element: CheckboxGroupFieldForm,
-    fieldAttributes: {
-      required: true,
-    },
-    extraAttributes: {
-      options: [
-        {
-          label: "School",
-          value: "school",
-        },
-        {
-          label: "Business",
-          value: "business",
-        },
-        {
-          label: "Company",
-          value: "company",
-        },
-      ],
-    },
-  },
+  // {
+  //   label: "Building",
+  //   attribute: "building",
+  //   description: "optional",
+  //   element: "CheckboxGroupField",
+  //   fieldAttributes: {
+  //     required: true,
+  //   },
+  //   extraAttributes: {
+  //     options: [
+  //       {
+  //         label: "School",
+  //         value: "school",
+  //       },
+  //       {
+  //         label: "Business",
+  //         value: "business",
+  //       },
+  //       {
+  //         label: "Company",
+  //         value: "company",
+  //       },
+  //     ],
+  //   },
+  // },
   {
     label: "Use print management",
     attribute: "usePrintManagement",
     description: "optional",
-    element: SwitchFieldForm,
+    element: "SwitchField",
     fieldAttributes: {
       required: true,
     },
@@ -234,19 +243,22 @@ const elements: FormFieldElement[] = [
     label: "Accept terms and conditions",
     attribute: "isAccepted",
     description: "optional",
-    element: CheckboxFieldForm,
+    element: "CheckboxField",
     fieldAttributes: {
       required: true,
     },
   },
 ];
 
-const formSchema = z.object({});
-
-// type Props = {
-//   elements: FormFieldElement[];
-//   schema:
-// }
+const formElements = {
+  InputField: InputFieldForm,
+  TextareaField: TextareaFieldForm,
+  SelectField: SelectFieldForm,
+  RadioGroupField: RadioGroupFieldForm,
+  CheckboxField: CheckboxFieldForm,
+  CheckboxGroupField: CheckboxGroupFieldForm,
+  SwitchField: SwitchFieldForm,
+};
 
 const FormContentFormFields = () => {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -276,20 +288,27 @@ const FormContentFormFields = () => {
               description,
               fieldAttributes,
               extraAttributes,
-              element: Element,
-            }) => (
-              <React.Fragment key={label}>
-                {
-                  <Element
-                    label={label}
-                    attribute={attribute}
-                    description={description}
-                    fieldAttributes={{ ...fieldAttributes, disabled: true }}
-                    extraAttributes={extraAttributes}
-                  />
-                }
-              </React.Fragment>
-            )
+              element,
+            }) => {
+              const Element = formElements[element];
+
+              return (
+                <FormField
+                  key={attribute}
+                  name={attribute}
+                  control={form.control}
+                  render={({ field, fieldState, formState }) => (
+                    <Element
+                      label={label}
+                      attribute={attribute}
+                      description={description}
+                      fieldAttributes={{ ...fieldAttributes }}
+                      extraAttributes={extraAttributes}
+                    />
+                  )}
+                />
+              );
+            }
           )}
         </div>
         <div className="my-4">

@@ -1,5 +1,10 @@
 import React from "react";
-import { FormControl, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import {
   Select,
   SelectContent,
@@ -9,11 +14,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FormFieldOption } from "@/app/workspaces/[workspaceId]/(workspace-admin)/workspace-configuration/ticket-categories/[ticketCategoryId]/components/form-content/FormContentFormFields";
+import {
+  FormFieldOption,
+  FormSchema,
+} from "@/app/workspaces/[workspaceId]/(workspace-admin)/workspace-configuration/ticket-categories/[ticketCategoryId]/components/form-content/FormContentFormFields";
+import { ControllerRenderProps } from "react-hook-form";
 
 export type SelectFieldFormProps = {
   label: string;
-  attribute: string;
+  attribute: keyof FormSchema;
   description?: string;
   fieldAttributes: {
     required?: boolean;
@@ -24,6 +33,7 @@ export type SelectFieldFormProps = {
     groupLabel?: string;
     options?: FormFieldOption[];
   };
+  // field: ControllerRenderProps<FormSchema, keyof FormSchema>;
 };
 
 const SelectFieldForm = ({
@@ -35,7 +45,10 @@ const SelectFieldForm = ({
 }: SelectFieldFormProps) => {
   return (
     <div className="flex justify-between items-start gap-4">
-      <FormLabel>{label}</FormLabel>
+      <div>
+        <FormLabel>{label}</FormLabel>
+        {description && <FormDescription>{description}</FormDescription>}
+      </div>
       <FormControl>
         <Select {...fieldAttributes}>
           <SelectTrigger className="w-[180px]">

@@ -7,7 +7,7 @@ import {
   FormItem,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { FormSchema } from "@/app/workspaces/[workspaceId]/(workspace-admin)/workspace-configuration/ticket-categories/[ticketCategoryId]/components/form-content/FormContentFormFields";
 
 export type InputFieldType =
   | "text"
@@ -19,7 +19,7 @@ export type InputFieldType =
 
 export type InputFieldProps = {
   label: string;
-  attribute: string;
+  attribute: keyof FormSchema;
   description?: string;
   fieldAttributes: {
     type?: InputFieldType;
@@ -27,6 +27,7 @@ export type InputFieldProps = {
     placeholder?: string;
     disabled?: boolean;
   };
+  // field: ControllerProps;
 };
 
 const InputFieldForm = ({
@@ -38,7 +39,10 @@ const InputFieldForm = ({
   return (
     <div className="flex flex-col gap-2">
       <FormItem>
-        <FormLabel>{label}</FormLabel>
+        <div>
+          <FormLabel>{label}</FormLabel>
+          {description && <FormDescription>{description}</FormDescription>}
+        </div>
         <FormControl>
           <Input {...fieldAttributes} />
         </FormControl>
